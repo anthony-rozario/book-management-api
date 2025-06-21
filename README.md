@@ -32,16 +32,19 @@ A full-stack Book Management System built with the MERN stack (MongoDB, Express.
 ```
 project-root/
 ├── backend/
-│   ├── controllers/
-│   │   └── bookController.js
-│   ├── models/
-│   │   └── Book.js
-│   ├── routes/
-│   │   └── bookRoutes.js
-│   ├── middlewares/
-│   │   └── upload.js
-│   └── server.js
-│
+|   └──mongoDB
+│       ├── controllers/
+│       │   └── bookController.js
+│       ├── models/
+│       │   └── Book.js
+│       ├── routes/
+│       │   └── bookRoutes.js
+│       ├── middlewares/
+│       │   └── upload.js
+│       ├── server.js
+│       └── upload folder
+|
+|
 ├── frontend/
 │   ├── components/
 │   │   └── BookForm.jsx
@@ -49,8 +52,7 @@ project-root/
 │   │   ├── EditBook.jsx
 │   │   └── BookDetails.jsx
 │   └── App.jsx
-│
-├── uploads/          # Image uploads (auto-generated)
+│          # Image uploads (auto-generated)
 ├── .env              # Environment variables
 ├── README.md
 ```
