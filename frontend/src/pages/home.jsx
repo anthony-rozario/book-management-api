@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <section className="text-gray-600 body-font p-20">
-      <div className="container px-5 py-24 mx-auto">
+      <div className="container px-5 py-16 mx-auto">
         <div className="flex flex-col text-center w-full mb-12">
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
             Every book has a place — find it here
@@ -44,7 +44,7 @@ export default function Home() {
               <div
                 key={index}
                 onClick={() =>
-                  navigate(`/book/${book.isbn || book._id}`, { state: book })
+                  navigate(`/book/${book._id}`, { state: book })
                 }
                 className="p-2 lg:w-1/3 md:w-1/2 w-full cursor-pointer"
               >
@@ -55,7 +55,7 @@ export default function Home() {
                   <img
                     alt={book.title}
                     className="w-auto max-h-38 bg-gray-100 object-cover object-center flex-shrink-0 rounded mr-4"
-                    src={book.image}
+                    src={`http://localhost:5000${book.image}`}
                   />
                   <div className="flex-grow">
                     <p className="text-gray-500 text-xs">ISBN: {book.isbn}</p>
