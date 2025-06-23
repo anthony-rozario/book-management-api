@@ -32,15 +32,25 @@ A full-stack Book Management System built with the MERN stack (MongoDB, Express.
 ```
 project-root/
 ├── backend/
-│ ├── controllers/
-│ │ └── bookController.js
-│ ├── models/
-│ │ └── Book.js
-│ ├── routes/
-│ │ └── bookRoutes.js
-│ ├── middlewares/
-│ │ └── upload.js
-│ └── server.js
+|       └── mongoDB
+|             ├── Tests/
+│             |     ├── Unit-Testing/
+│             |     │     ├── bookController.mocked.test.js
+|             |     |     └── bookController.real.test.js
+│             |     ├── Integration-Testing/
+│             |     │      └── bookRoutes.integration.test.js 
+|             |     └── API-Testing/
+│             |           └── bookAPI.test.js  
+│             ├── controllers/
+│             │     └── bookController.js
+│             ├── models/
+│             │     └── Book.js
+│             ├── routes/
+│             │     └── bookRoutes.js
+│             ├── middlewares/
+│             │     └── upload.js
+|             ├── uploads/
+│             └── index.js
 │
 ├── frontend/
 │ ├── components/
@@ -143,6 +153,65 @@ const bookSchema = new mongoose.Schema({
   image: String, // /uploads/filename.jpg
 });
 ```
+
+## 🧪 Testing & Coverage
+
+#### This project includes:
+- ✅ Unit Tests (mocked and real DB)
+- ✅ Integration Tests (with MongoDB in-memory server)
+- ✅ API Tests (with live endpoints)
+- ✅ Code coverage report using Jest
+
+### 🔧 Run All Tests
+```bash
+npm test
+```
+### 📊 Run with Coverage Report
+```bash
+npm test --coverage
+```
+### 🧾 Test Tools Used
+- Jest – for running all tests
+- Supertest – for API route testing
+- mongodb-memory-server – for in-memory MongoDB instance used in tests
+
+<h2>✅ Test Summary</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Requirement</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Unit tests (mocked + real)</td>
+      <td>✅ Complete</td>
+    </tr>
+    <tr>
+      <td>Integration tests</td>
+      <td>✅ Complete</td>
+    </tr>
+    <tr>
+      <td>API endpoint tests</td>
+      <td>✅ Complete</td>
+    </tr>
+    <tr>
+      <td>Jest test coverage &gt; 70%</td>
+      <td>✅ 83.58%</td>
+    </tr>
+    <tr>
+      <td>README includes test info</td>
+      <td>✅ Done</td>
+    </tr>
+    <tr>
+      <td>Test coverage screenshot</td>
+      <td>✅<br><img src="./assets/coverage.png" width="600"/></td>
+    </tr>
+  </tbody>
+</table>
+
 ## 📦 Multer File Upload
 `upload.js` uses `multer.diskStorage` to store images in `/uploads.`
 
@@ -161,11 +230,11 @@ payload.append("image", formData.image);
 formData.genres.forEach((g) => payload.append("genres[]", g));
 ```
 ## 🔄 Edit Book Flow
-- EditBook.jsx fetches book using useParams()
+- `EditBook.jsx` fetches book using `useParams()`
 
-- Passes data to <BookForm isEdit={true} />
+- Passes data to `<BookForm isEdit={true} />`
 
-- Form sends PUT request with FormData
+- Form sends `PUT` request with `FormData`
 
 ## 📸 Screenshots
 ##### Add screenshots of:
@@ -182,6 +251,7 @@ formData.genres.forEach((g) => payload.append("genres[]", g));
 
 ## 👨‍💻 Author
 Anthony Prakash Rozario
+
 MCA 🎓- Adamas University
 
 

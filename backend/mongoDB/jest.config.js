@@ -1,6 +1,11 @@
 module.exports = {
   testEnvironment: 'node',
   coverageDirectory: './coverage',
-  collectCoverageFrom: ['controllers/**/*.js'],
-  testMatch: ['**/test/**/*.test.js'], // ✅ match singular `test/`
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'controllers/**/*.js',
+    'models/**/*.js',
+    'routes/**/*.js'
+  ],
+  testMatch: ['**/test/**/*.test.js'], // this is fine
 };

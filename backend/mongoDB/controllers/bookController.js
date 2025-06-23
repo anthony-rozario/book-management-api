@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Book = require("../models/Book");
 
 // GET all books
@@ -11,13 +12,28 @@ exports.getBooks = async (req, res) => {
 };
 
 // GET book by ID
+
 exports.getBookById = async (req, res) => {
+  const { id } = req.params;
+
+  // ✅ Step 1: Validate ID format before hitting DB
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid book ID format" });
+  }
+
   try {
-    const book = await Book.findById(req.params.id);
-    if (!book) return res.status(404).json({ message: "Book not found" });
+    const book = await Book.findById(id);
+
+    // ✅ Step 2: Handle non-existent book
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
     res.json(book);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    // ✅ Step 3: Log unexpected errors
+    console.error("Error fetching book by ID:", err.message);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -79,11 +95,17 @@ exports.updateBook = async (req, res) => {
       runValidators: true,
     });
 
+    // ✅ Add this check
+    if (!updated) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
     res.json(updated);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
+
 
 // DELETE a book
 exports.deleteBook = async (req, res) => {
