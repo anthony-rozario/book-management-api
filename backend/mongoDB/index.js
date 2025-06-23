@@ -1,23 +1,9 @@
 // index.js
-
-const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const dotenv = require("dotenv");
-const path = require("path"); // ✅ must be above to use in static
+const app = require("./app");
 
 dotenv.config();
-
-const app = express();
-
-// Serve static image files before routes
-app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // ✅ move this up
-
-app.use(cors());
-app.use(express.json());
-
-const bookRoutes = require("./routes/bookRoutes");
-app.use("/api/books", bookRoutes); // API routes
 
 mongoose
   .connect(process.env.MONGO_URI)
