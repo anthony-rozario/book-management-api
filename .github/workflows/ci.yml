@@ -10,6 +10,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      mongo:
+        image: mongo:5.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongo --eval 'db.adminCommand(\"ping\")'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -27,7 +38,7 @@ jobs:
         working-directory: ./backend/mongoDB
         run: |
           npm start &
-          sleep 10  # Wait for API to be ready
+          sleep 15  # Wait for API and MongoDB to be fully ready
 
       - name: Install Keploy CLI
         run: |
