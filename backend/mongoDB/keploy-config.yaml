@@ -1,0 +1,7 @@
+name: book-management-api
+port: 5000
+path: .
+tests:
+  generate: true
+  record: true
+  run: true
