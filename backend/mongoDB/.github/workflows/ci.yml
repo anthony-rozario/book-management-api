@@ -1,38 +1,39 @@
-name: CI with Keploy
+name: Keploy API Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  keploy-tests:
+  test:
     runs-on: ubuntu-latest
-
-    services:
-      mongo:
-        image: mongo:latest
-        ports:
-          - 27017:27017
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Download Keploy
+      - name: Start server
         run: |
-          curl -sL https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -o keploy
-          chmod +x keploy
-          sudo mv keploy /usr/local/bin/
+          npm start &
+          sleep 10  # Wait for API to be ready
 
-      - name: Run Keploy API Tests
-        run: keploy test -c "npm start"
+      - name: Install Keploy
+        run: |
+          curl --silent -L https://keploy.io/ent/install.sh | bash
+
+      - name: Run Keploy Tests
+        env:
+          KEPLOY_API_KEY: ${{ secrets.KEPLOY_API_KEY }}
+        run: |
+          keploy test-suite \
+            --app=0dd7ad67-0fa6-4c35-9690-392a80251
