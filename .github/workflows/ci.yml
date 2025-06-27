@@ -20,14 +20,16 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm ci
+        working-directory: ./backend/mongoDB
+        run: npm install
 
       - name: Start server
+        working-directory: ./backend/mongoDB
         run: |
           npm start &
           sleep 10  # Wait for API to be ready
 
-      - name: Install Keploy
+      - name: Install Keploy CLI
         run: |
           curl --silent -L https://keploy.io/ent/install.sh | bash
 
@@ -36,4 +38,6 @@ jobs:
           KEPLOY_API_KEY: ${{ secrets.KEPLOY_API_KEY }}
         run: |
           keploy test-suite \
-            --app=0dd7ad67-0fa6-4c35-9690-392a80251
+            --app=0dd7ad67-0fa6-4c35-9690-392a802518bd \
+            --base-path=http://localhost:5000/api/books \
+            --cloud
