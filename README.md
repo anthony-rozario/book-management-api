@@ -209,8 +209,19 @@ npm test --coverage
       <td>Test coverage screenshot</td>
       <td>✅<br><img src="./assets/coverage.png" width="600"/></td>
     </tr>
+    <tr>
+      <td>Keploy API Test Report</td>
+      <td>✅<br><img src="./assets/keploy-test-report.png" width="600"/> All test suites (26/26) passed using Keploy's AI-powered API test automation.</td>
+    </tr>
   </tbody>
 </table>
+
+## ⚙️ CI/CD Configuration
+
+![Keploy API Tests](https://github.com/anthony-rozario/book-management-api/actions/workflows/ci.yml/badge.svg)
+
+GitHub Actions workflow to run Keploy API tests:
+[👉 View Workflow File](https://github.com/anthony-rozario/book-management-api/blob/main/.github/workflows/ci.yml)
 
 ## 📦 Multer File Upload
 `upload.js` uses `multer.diskStorage` to store images in `/uploads.`
