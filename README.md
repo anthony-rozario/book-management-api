@@ -263,7 +263,7 @@ formData.genres.forEach((g) => payload.append("genres[]", g));
 ## 👨‍💻 Author
 Anthony Prakash Rozario
 
-MCA 🎓- Adamas University
+MCA 🎓- KIIT University
 
 
 ## 📄 License
